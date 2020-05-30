@@ -23,7 +23,6 @@ public:
         pair<int, int> arr[n + 1];
         for (int i = 0; i < n; ++i) arr[i] = make_pair(nums[i], i);
         sort(arr, arr + n);
-        for (int i = 0; i < n; ++i) cout << arr[i].first << " "; cout << endl;
         int last_v = arr[0].first;
         arr[0].first = 1;
         int v = 1;
@@ -36,15 +35,14 @@ public:
             }
             else arr[i].first = arr[i - 1].first;
         }
-        for (int i = 0; i < n; ++i) cout << arr[i].first << " "; cout << endl;
         sort(arr, arr + n, cmp);
-        for (int i = 0; i < n; ++i) cout << arr[i].first << " "; cout << endl;
         min_v[0] = arr[0].first;
         for (int i = 1; i < n; ++i) min_v[i] = min(min_v[i - 1], arr[i].first);
         update(arr[n - 1].first, 1);
         for (int i = n - 2; i >= 1; --i) {
             int a_i = min_v[i - 1];
             int nb = sum(arr[i].first - 1) - sum(a_i);
+            update(arr[i].first, 1);
             if (nb > 0) return true;
         }
         return false;
