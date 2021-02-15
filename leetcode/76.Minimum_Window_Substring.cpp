@@ -1,43 +1,36 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int n = t.size();
-        int m = s.size();
-        t = '0' + t;
-        s = '0' + s;
-        int max_char = 60;
-        int cnt_tr[max_char];
-        int cnt_sr[max_char];
-        for (int i = 0; i < max_char; ++i) {
-                cnt_sr[i] = 0;
-                cnt_tr[i] = 0;
-        }
-        for (int i = 1; i <= n; ++i) {
-                cnt_tr[t[i] - 'A'] += 1;
-        }
-        int satis = 0;
-        for (int i = 0; i < max_char; ++i) if (cnt_tr[i] == 0) satis += 1;
-        int st = 1;
-        int saveL = m + 1, savest = -1, saveen = -1;
-        for (int i = 1; i <= m; ++ i) {
-            cnt_sr[s[i] - 'A'] += 1;
-            if (cnt_sr[s[i] - 'A'] == cnt_tr[s[i] - 'A']) satis += 1;
-            while ((satis == max_char) and (st <= i)) {
-                if (saveL > i - st + 1) {
-                    saveL = i - st + 1;
-                    savest = st;
-                    saveen = i;
+        int cnt[60], dd[60];
+        deque<int> dq;
+        memset(dd, 0, sizeof(dd));
+        memset(cnt, 0, sizeof(cnt));
+        int save_st = -1;
+        int save_en = -1;
+        int save_length = (int)(1e5 + 5);
+        int current = 0;
+        for (int i = 0; i < t.size(); ++i) ++dd[t[i] - 'A'];
+        for (int i = 0; i < 60; ++i) if (dd[i] == 0) ++current;
+        for (int i = 0; i < s.size(); ++i) {
+            ++cnt[s[i] - 'A'];
+            dq.push_back(i);
+            if (cnt[s[i] - 'A'] == dd[s[i] - 'A']) ++current;
+            if (current == 60) {
+                while ((current == 60) and !dq.empty()) {
+                    if (dq.back() - dq.front() + 1 < save_length) {
+                        save_length = dq.back() - dq.front() + 1;
+                        save_st = dq.front();
+                        save_en = dq.back();
+                    }
+                    int st = dq.front();
+                    --cnt[s[st] - 'A'];
+                    if (cnt[s[st] - 'A'] == dd[s[st] - 'A'] - 1) --current;
+                    dq.pop_front();
                 }
-                --cnt_sr[s[st] - 'A'];
-                if (cnt_sr[s[st] - 'A'] < cnt_tr[s[st] - 'A']) satis -= 1;
-                st += 1;
             }
         }
-        if (saveL == m + 1) return "";
-        else {
-            string ans = "";
-            for (int i = savest; i <= saveen; ++i) ans += s[i];
-            return ans;
-        }
+        string result = "";
+        if (save_st != -1) result = s.substr(save_st, save_length);
+        return result;
     }
 };
