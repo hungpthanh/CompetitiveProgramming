@@ -8,7 +8,7 @@ class Solution(object):
             return 0
         min_value = prices[0]
         res = 0
-        for price in prices:
+        for price in prices[1:]:
             res = max(res, price - min_value)
             min_value = min(min_value, price)
         return res
