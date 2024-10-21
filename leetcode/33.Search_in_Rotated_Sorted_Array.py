@@ -7,7 +7,7 @@ class Solution(object):
         """
         n = len(nums)
         left, right = 0, n - 1
-        while (left < right):
+        while (left <= right):
             mid = (left + right) / 2
             if nums[mid] == target:
                 return mid
@@ -15,6 +15,4 @@ class Solution(object):
                 left = mid + 1
             else:
                 right = mid - 1
-        if nums[left] == target:
-            return left
         return -1
