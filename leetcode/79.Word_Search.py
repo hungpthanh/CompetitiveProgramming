@@ -18,6 +18,11 @@ class Solution:
         cy = [0, 0, -1, 1]
         m = len(board)
         n = len(board[0])
+
+        overall_counter = Counter(element for row in board for element in row)
+        for char, char_count in Counter(word).items():
+            if char_count > overall_counter[char]:
+                return False
         for i in range(m):
             for j in range(n):
                 if board[i][j] == word[0]:
@@ -27,4 +32,3 @@ class Solution:
                     if ans:
                         return True
         return False
-      
