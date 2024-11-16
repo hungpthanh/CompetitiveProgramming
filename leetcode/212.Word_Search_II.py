@@ -18,13 +18,12 @@ class Node:
         self.childs.append(new_child)
         new_child.add_word(word[1:])
 
-    def delete(node):
-        parent = node.parent
-        if parent:
-            while (len(parent.childs)) < 2:
-                parent.childs.remove(node)
-                node = None
-                delete(parent)
+    def delete(self):
+        parent = self.parent
+        if parent is not None and len(parent.childs) < 2:
+            parent.childs.remove(self)
+            # self.parent = None
+            self = None
 
     def search(self, word: str) -> bool:
         if not word:
@@ -64,10 +63,6 @@ class Solution:
                 return
             if node.is_end:
                 results.add("".join(tmp))
-            # next_child, is_end = query_trie.search(board[i][j])
-            
-            # if not next_child and is_end:
-            #     results.append(ss)
 
             for k in range(4):
                 x = i + cx[k]
@@ -83,6 +78,9 @@ class Solution:
                     dfs(x, y, cnt, next_node)
                     mark[x][y] = False
                     tmp = tmp[:-1]
+                
+            if len(node.childs) == 0:
+                node.delete()
         mark = [[False] * n for _ in range(m)]
 
         for i in range(m):
