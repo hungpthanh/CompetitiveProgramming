@@ -19,16 +19,16 @@ void solve() {
     for (const auto& pair: counter) {
         int c;
         c = pair.second;
-        if (c > 2) res += ((long long) 1 * c * (c - 1) * (c - 2)) / 6;
-        if (c > 1) res += ((long long) 1 * (c * (c - 1)) / 2) * smaller;
+        if (c > 2) res += (1LL * c * (c - 1) * (c - 2)) / 6;
+        if (c > 1) res += ((1LL * c * (c - 1)) / 2) * smaller;
         smaller += c;
     }
     cout << res << endl;
 }
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    freopen("test.in", "r", stdin);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(NULL);
+    // freopen("test.in", "r", stdin);
     // freopen("test.out", "w", stdout);
     cin >> n_test;
     for (int t = 1; t <= n_test; ++t) {
@@ -37,3 +37,4 @@ int main() {
     }
     return 0;
 }
+
