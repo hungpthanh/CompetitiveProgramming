@@ -1,7 +1,6 @@
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         intervals = sorted(intervals, key=lambda x: x[0])
-        print(intervals)
         n = len(intervals)
         dp = [0] * (n + 1)
         best = [5 * 1e4 + 5] * (n + 1)
