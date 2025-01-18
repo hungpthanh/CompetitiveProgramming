@@ -1,31 +1,36 @@
 class Solution:
     def getCollisionTimes(self, cars: List[List[int]]) -> List[float]:
+        def catch(carA, carB):
+            print(carA)
+            print(carB)
+            if carA[1] == carB[1]:
+                return -1
+            t = (carB[0] - carA[0]) / (carA[1] - carB[1])
+            if t >= 0:
+                return t
+            return -1
         n = len(cars)
         cars = cars[::-1]
-        answers = [-1] * n
-        last = 0
-        for i in range(2, n):
-            l, r = last, i - 1
-            if cars[i][1] < cars[last][1]:
-                answers[i] = -1
-                continue
-            save_t = -1
-            while l <= r:
-                mid = (l + r) // 2
-                if cars[i][1] < cars[mid][1]:
-                    l = mid + 1
-                    continue
-                t = (cars[mid][0] - cars[i][0]) / (cars[i][1] - cars[mid][1])
-                if answers[mid] < 0:
-                    save_t = t
-                    r = mid - 1
-                else:
-                    if t <= answers[mid]:
-                        save_t = t
-                        l = mid + 1
-                    else:
-                        r = mid - 1
-            answers[i] = save_t
-            if save_t == -1:
-                last = i
-        return answers[::-1]
+        cars = [None] + cars
+        answers = [-1] * (n + 1)
+        stack = []
+        stack.append(cars[1])
+        for i in range(2, n + 1):
+            print(f"i = {i}")
+            while len(stack) > 0:
+                top = stack.pop()
+                t = catch(cars[i], top)
+                t1 = -1
+                if len(stack) > 0:
+                    t1 = catch(top, stack[-1])
+                print(f"top = {top}, t = {t}")
+                if t >= 0 and t < t1:
+                    new_p = top[0] + top[1] * t
+                    stack.append([new_p, top[1]])
+                    answers[i] = t
+                    break
+            stack.append(cars[i])
+        answers = answers[::-1]
+        answers.pop()
+        return answers
+            
