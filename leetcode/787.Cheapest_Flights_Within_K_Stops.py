@@ -4,13 +4,13 @@ class Solution:
         adj = {i: [] for i in range(n)}
         for u, v, p in flights:
             adj[u].append((v, p))
-        INF = 1e7 + 5
-        D = [[INF for _ in range(k + 1)] for _ in range(n)]
-        P = [[False for _ in range(k + 1)] for _ in range(n)]
+        INF = 1e9 + 5
+        D = [[INF for t in range(k + 1)] for _ in range(n)]
+        P = [[False for t in range(k + 1)] for _ in range(n)]
 
         D[src][0] = 0
         
-        for i in range(n):
+        for i in range(n * k):
             Max = INF
             uBest = None
             for u in range(n):
