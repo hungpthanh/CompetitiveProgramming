@@ -6,6 +6,8 @@ class Solution:
         parenthese = ""
         def gen(i: int):
             nonlocal count, parenthese
+            if count > n - i + 1:
+                return
             if i == n + 1:
                 if count == 0:
                     results.append(parenthese)
