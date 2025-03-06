@@ -21,12 +21,8 @@ class Solution:
             p = tile[1] - carpetLen + 1
             index = search(idx, p)
             
-            if p <= tiles[index + 1][0]:
-                if index != -1:    
-                    res = max(res, sum_v[idx] - sum_v[index])
-                else:
-                    res = max(res, sum_v[idx])
-            else:
-                cp = tiles[index + 1][1] - p + 1 + sum_v[idx] - sum_v[index + 2] if index + 2 <= idx else tiles[index + 1][1] - p + 1
-                res = max(res, cp)
+            cp = sum_v[idx] - sum_v[index] if index >=0 else sum_v[idx]
+            if p - tiles[index + 1][0] >= 0:
+                cp -= (p - tiles[index + 1][0])
+            res = max(res, cp)
         return res
