@@ -22,7 +22,10 @@ class Solution:
             index = search(idx, p)
             
             if p <= tiles[index + 1][0]:
-                res = max(res, sum_v[idx] - sum_v[index])
+                if index != -1:    
+                    res = max(res, sum_v[idx] - sum_v[index])
+                else:
+                    res = max(res, sum_v[idx])
             else:
                 cp = tiles[index + 1][1] - p + 1 + sum_v[idx] - sum_v[index + 2] if index + 2 <= idx else tiles[index + 1][1] - p + 1
                 res = max(res, cp)
