@@ -10,3 +10,38 @@
 # -- If char at k - 1 type by finger 2: dp[i][k] = min(dp[i][k - 1] + d[k - 1][k])
 
 # Answer = min(dp[n - 1][j], dp[i][n - 1])
+
+class Solution:
+    def minimumDistance(self, word: str) -> int:
+        inf = int(1e8)
+        def get_location(c):
+            index = ord(c) - ord('A')
+            row = index // 5
+            col = index % 5
+            return [row, col]
+
+        def distance(p1, p2):
+            return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+
+        n = len(word)
+        word = '.' + word
+
+        location = [get_location(word[i]) for i in range(1, n + 1)]
+        location = [(-1, -1)] + location
+
+        dp = [[inf] * (n + 1) for _ in range(n + 1)]
+        dp[1][0] = 0
+        dp[0][1] = 0
+        for k in range(2, n + 1):
+            for j in range(k - 1):
+                dp[k][j] = min(dp[k][j], dp[k - 1][j] + distance(location[k - 1], location[k]))
+            for i in range(k - 1):
+                dp[k][k - 1] = min(dp[k][k - 1], dp[i][k - 1] + distance(location[i], location[k]))
+            for j in range(k - 1):
+                dp[k - 1][k] = min(dp[k - 1][k], dp[k - 1][j] + distance(location[j], location[k]))
+            for i in range(k - 1):
+                dp[i][k] = min(dp[i][k], dp[i][k - 1] + distance(location[k - 1], location[k]))
+        ans = inf
+        for i in range(n):
+            ans = min(ans, min(dp[n][i], dp[i][n]))
+        return ans
