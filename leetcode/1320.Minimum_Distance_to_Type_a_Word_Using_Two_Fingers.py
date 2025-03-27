@@ -16,18 +16,20 @@ class Solution:
         inf = int(1e8)
         def get_location(c):
             index = ord(c) - ord('A')
-            row = index // 5
-            col = index % 5
+            row = index // 6 
+            col = index % 6 
             return [row, col]
 
         def distance(p1, p2):
+            if p2 == [-1, -1] or p1 == [-1, -1]:
+                return 0
             return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
         n = len(word)
         word = '.' + word
 
         location = [get_location(word[i]) for i in range(1, n + 1)]
-        location = [(-1, -1)] + location
+        location = [[-1, -1]] + location
 
         dp = [[inf] * (n + 1) for _ in range(n + 1)]
         dp[1][0] = 0
@@ -35,11 +37,9 @@ class Solution:
         for k in range(2, n + 1):
             for j in range(k - 1):
                 dp[k][j] = min(dp[k][j], dp[k - 1][j] + distance(location[k - 1], location[k]))
-            for i in range(k - 1):
-                dp[k][k - 1] = min(dp[k][k - 1], dp[i][k - 1] + distance(location[i], location[k]))
-            for j in range(k - 1):
                 dp[k - 1][k] = min(dp[k - 1][k], dp[k - 1][j] + distance(location[j], location[k]))
             for i in range(k - 1):
+                dp[k][k - 1] = min(dp[k][k - 1], dp[i][k - 1] + distance(location[i], location[k]))
                 dp[i][k] = min(dp[i][k], dp[i][k - 1] + distance(location[k - 1], location[k]))
         ans = inf
         for i in range(n):
