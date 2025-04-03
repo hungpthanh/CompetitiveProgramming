@@ -1,5 +1,6 @@
 # TODO
 # IDEA: The next permution is the smallest number that >= current permution
+# Please improve sort part, just reverse
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
         """
