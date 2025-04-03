@@ -1,5 +1,5 @@
 # TODO
-# IDEA: TBD
+# IDEA: The next permution is the smallest number that >= current permution
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
         """
