@@ -1,3 +1,4 @@
+# IDEA: convert one of 1 blocks to 0 / the sum 2 adj 0 block is max -> using RMQ
 class Solution:
 
     def create_segments(s):
