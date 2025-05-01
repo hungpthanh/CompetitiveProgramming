@@ -1,44 +1,25 @@
 # IDEA: convert one of 1 blocks to 0 / the sum 2 adj 0 block is max -> using RMQ
 class Solution:
 
-    def create_segments(s):
-        st, en = -1, -1
-        n = len(s)
-        segments = []
-        print(f"n = {n}")
-        fsum = [0] * n
- 
-        print(fsum)
-        for i in range(n):
-            if i > 0:
-                print(f"i = {i}")
-                fsum[i] = fsum[i - 1]
-            if s[i] == '1':
-                fsum[i] += 1
-                if st == -1:
-                    st = i
-                    en = i
-                else:
-                    en = i
+    def create_segments(self, n, s):
+        segments = [[0, 0]]
+        add = True
+        for i in range(1, n + 1):
+            if s[i] == '0':
+                add = True
             else:
-                if en != -1:
-                    segments.append([st, en])
-                    st = -1
-                    en = -1
-        
-        if st != -1:
-            segments.append([st, en])
-        
+                if add:
+                    segments.append([i, i])
+                    add = False
+                else:
+                    segments[-1][1] = i
+        segments.append([n + 1, n + 1])
         return segments
 
     def maxActiveSectionsAfterTrade(self, s: str, queries: List[List[int]]) -> List[int]:
         n = len(s)
-        segments = create_segments()
-        m = len(segments)
-        
-        actives = [0] * m
-        for i in range(m):
-            p = segments[i - 1][1] if i - 1 >= 0 else -1
-            q = segments[i + 1][1] if i + 1 < m else n
-            actives[i] = q - p
+        s = '1' + s + '1'
+        segments = self.create_segments(n, s)
+        print(segments)
+        res = []
         return res
