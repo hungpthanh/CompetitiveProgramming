@@ -1,4 +1,5 @@
 # IDEA: convert one of 1 blocks to 0 / the sum 2 adj 0 block is max -> using RMQ
+# EXP: Wrong a lot of time on using bisect, need to be careful init for [l, maxn] and [r, -1]
 import math
 
 class RangeMinimumQuery:
@@ -73,14 +74,10 @@ class Solution:
 
         su = [0] * (n + 2)
         for i in range(1, n + 1):
-            # print(s[i])
             su[i] = su[i - 1] + (1 if s[i] == '1' else 0)
-        # print(f"su: {su}")
         segments, left, right = self.create_segments(n, s)
-        # print(f"segments: {segments}")
         m = len(segments) - 2  # don't count guardian
         actives = self.create_active(m, segments)
-        # print(f"active: {actives}")
         if m > 0:
             rmg = RangeMinimumQuery(actives)
         maxn = int(1e5 + 5)
@@ -90,9 +87,8 @@ class Solution:
                 res.append(su[n])
                 continue
             l, r = l + 1, r + 1
-            index_l = bisect_right(segments, [l, l])
-            index_r = bisect_left(segments, [r, r], key=lambda x: [x[1], x[0]]) - 1
-            # print(f"l: {l}, r: {r}, index_l: {index_l}, index_r: {index_r}")
+            index_l = bisect_right(segments, [l, maxn])
+            index_r = bisect_left(segments, [r, -1], key=lambda x: [x[1], x[0]]) - 1
             if (index_l > index_r) or (not ((1 <= index_l <= m) and (1 <= index_r <= m))):
                 res.append(su[n])
                 continue
