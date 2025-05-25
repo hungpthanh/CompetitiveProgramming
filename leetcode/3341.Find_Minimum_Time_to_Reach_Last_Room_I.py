@@ -28,3 +28,5 @@ class Solution:
                     new_dis = d[max_u] + 1 + (moveTime[nu - 1][nv - 1] - d[max_u] if moveTime[nu - 1][nv - 1] >= d[max_u] else 0)
                     d[(nu - 1)* m + nv] = min(d[(nu - 1) * m + nv], new_dis)
         return d[p]
+
+# Add Heap solution
