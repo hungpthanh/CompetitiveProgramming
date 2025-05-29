@@ -25,11 +25,10 @@ class Solution:
             dis2 = [0 for _ in range(m)]
             distance = 0
             dfs(i, adj2, visited, 0, dis2)
-            cnt = [0 for i in range(m)]
-            for i in range(m):
-                cnt[dis2[i]] += 1
-            for i in range(m):
-                max_dis[i] = max(max_dis[i], cnt[i])
+            for j in range(m):
+                if dis2[j] <= k - 1:
+                    max_dis[i] += 1
+
         ans = []
         for i in range(n):
             res = 0
@@ -41,8 +40,10 @@ class Solution:
             for d in dis1:
                 if d <= k:
                     init_cnt += 1
-            min_dis = min(dis1)
-            for j in range(k - min_dis):
-                res = max(res, max_dis[j] + init_cnt)
+
+            res = 0
+            for j in range(m):
+                res = max(res, init_cnt + max_dis[j])
+
             ans.append(res)
         return ans
