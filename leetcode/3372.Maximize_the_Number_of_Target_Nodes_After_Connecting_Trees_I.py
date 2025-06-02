@@ -13,37 +13,16 @@ class Solution:
         adj1 = build_adj(n, edges1)
         adj2 = build_adj(m, edges2)
 
-        def dfs(u: int, adj, visited, distance, dis):
-            visited[u] = True
+        def buid_distance(u, parent_u, adj, level, max_level):
+            if level > max_level:
+                return
+            cnt = 1
             for v in adj[u]:
-                if not visited[v]:
-                    dis[v] = distance + 1
-                    dfs(v, adj, visited, dis[v], dis)
-        max_dis = [0 for _ in range(m)]
-        for i in range(m):
-            visited = [False for _ in range(m)]
-            dis2 = [0 for _ in range(m)]
-            distance = 0
-            dfs(i, adj2, visited, 0, dis2)
-            for j in range(m):
-                if dis2[j] <= k - 1:
-                    max_dis[i] += 1
-
-        ans = []
+                if v != parent_u:
+                    cnt += build_distance(v, u, adj, level + 1, max_level)
+            return cnt
+        
         for i in range(n):
-            res = 0
-            visited = [False for _ in range(n)]
-            dis1 = [0 for _ in range(n)]
-            distance = 0
-            dfs(i, adj1, visited, 0, dis1)
-            init_cnt = 0
-            for d in dis1:
-                if d <= k:
-                    init_cnt += 1
-
-            res = 0
-            for j in range(m):
-                res = max(res, init_cnt + max_dis[j])
-
-            ans.append(res)
+            cnt1 = build_distance(i, -1, adj1, 0, k)
+            
         return ans
