@@ -21,8 +21,12 @@ class Solution:
                 if v != parent_u:
                     cnt += build_distance(v, u, adj, level + 1, max_level)
             return cnt
-        
+        max_on_tree2 = -1
+        for u in range(m):
+            cnt = build_distance(u, -1, adj2, 0, k - 1)
+            max_on_tree2 = max(max_on_tree2, cnt)
+        res = 0
         for i in range(n):
             cnt1 = build_distance(i, -1, adj1, 0, k)
-            
+            res = max(res, cnt1 + max_on_tree2)
         return ans
