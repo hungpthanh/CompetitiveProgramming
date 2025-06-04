@@ -19,11 +19,11 @@ class Solution:
             cnt = 1
             for v in adj[u]:
                 if v != parent_u:
-                    cnt += build_distance(v, u, adj, level + 1, max_level)
+                    cnt += buid_distance(v, u, adj, level + 1, max_level)
             return cnt
         max_on_tree2 = -1
         for u in range(m):
-            cnt = build_distance(u, -1, adj2, 0, k - 1)
+            cnt = buid_distance(u, -1, adj2, 0, k - 1)
             max_on_tree2 = max(max_on_tree2, cnt)
         res = 0
         for i in range(n):
