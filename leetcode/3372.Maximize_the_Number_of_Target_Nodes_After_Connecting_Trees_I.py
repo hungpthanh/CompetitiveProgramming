@@ -15,7 +15,7 @@ class Solution:
 
         def buid_distance(u, parent_u, adj, level, max_level):
             if level > max_level:
-                return
+                return 0
             cnt = 1
             for v in adj[u]:
                 if v != parent_u:
@@ -26,7 +26,9 @@ class Solution:
             cnt = buid_distance(u, -1, adj2, 0, k - 1)
             max_on_tree2 = max(max_on_tree2, cnt)
         res = 0
+        ans = []
         for i in range(n):
-            cnt1 = build_distance(i, -1, adj1, 0, k)
-            res = max(res, cnt1 + max_on_tree2)
+            cnt1 = buid_distance(i, -1, adj1, 0, k)
+            res = cnt1 + max_on_tree2
+            ans.append(res)
         return ans
