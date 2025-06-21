@@ -1,5 +1,6 @@
 # IDEA: TBD
 # Resource: https://codeforces.com/blog/entry/101271
+# TODO: Improve the final equation
 class Solution:
     def minimumDiameterAfterMerge(self, edges1: List[List[int]], edges2: List[List[int]]) -> int:
         n, m = len(edges1) + 1, len(edges2) + 1
