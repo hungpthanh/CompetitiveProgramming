@@ -47,14 +47,14 @@ class Solution:
         v = [MAX_INT, MAX_INT, MAX_INT, MAX_INT]
 
         while k:
-            print("k = " + str(k))
+            
             for index in update:
                 v[index] = next(g[index], MAX_INT)
-            
+
             if k == 1:
                 return min(v)
             
-            for index in update:
+            for index in range(4):
                 if min(v) == v[index]:
                     update = [index]
                     break
