@@ -1,3 +1,4 @@
+# TLE, sol: binary search results, i.e., the value of k-th
 class Data:
     def __init__(self, value, i, j):
         self.value = value
