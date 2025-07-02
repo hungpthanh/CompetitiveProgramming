@@ -1,5 +1,6 @@
 # TLE, sol: binary search results, i.e., the value of k-th
 # Using BS to counting number of element 
+# The current sol got TLE
 class Data:
     def __init__(self, value, i, j):
         self.value = value
