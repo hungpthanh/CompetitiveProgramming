@@ -1,3 +1,4 @@
+# TODO: Prove greendy solution
 class Solution:
     def maximumGain(self, s: str, x: int, y: int) -> int:
         def remove(s, t, point):
