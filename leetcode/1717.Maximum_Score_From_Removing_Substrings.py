@@ -1,4 +1,5 @@
 # TODO: Prove greendy solution
+# Let pronve exist a way to remove maximum higher score string
 class Solution:
     def maximumGain(self, s: str, x: int, y: int) -> int:
         def remove(s, t, point):
