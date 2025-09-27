@@ -1,10 +1,8 @@
 class Solution:
     def superPow(self, a: int, b: List[int]) -> int:
-        print("b = ", b)
         def devide(numbers: List[int]):
             remains = 0
             ans = []
-            # print("numbers = ", numbers)
             for number in numbers:
                 k = remains * 10 + number
                 c = k // 2
@@ -34,6 +32,7 @@ class Solution:
         if is_zero(b):
             return 1
         if is_odd(b):
-            return (self.superPow(a, sub_one(b)) * (a % 1337)) % 1337
+            b[-1] = b[-1] - 1
+            return (self.superPow(a, b) * (a % 1337)) % 1337
         p = self.superPow(a, devide(b))
         return (p * p) % 1337
