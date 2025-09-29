@@ -1,3 +1,4 @@
+# Update: TODO with math knowledge, reading Euler theorem
 class Solution:
     def superPow(self, a: int, b: List[int]) -> int:
         def devide(numbers: List[int]):
