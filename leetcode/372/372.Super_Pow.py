@@ -37,3 +37,14 @@ class Solution:
             return (self.superPow(a, b) * (a % 1337)) % 1337
         p = self.superPow(a, devide(b))
         return (p * p) % 1337
+    
+class Solution2:
+    def superPow(self, a: int, b: List[int]) -> int:
+        if a % 1337 == 0:
+            return 0
+        p = 0
+        for i in b:
+            p = (p * 10 + i) % 1140
+        if p == 0:
+            p += 1140
+        return pow(a, p, 1337)
