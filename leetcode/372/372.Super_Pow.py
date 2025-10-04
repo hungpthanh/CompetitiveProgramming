@@ -48,3 +48,5 @@ class Solution2:
         if p == 0:
             p += 1140
         return pow(a, p, 1337)
+
+# Studying Chinese remainder theorem
