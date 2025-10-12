@@ -50,3 +50,13 @@ class Solution2:
         return pow(a, p, 1337)
 
 # Studying Chinese remainder theorem
+class Solution:
+    def power(self, a, n, MOD):
+        if n == 0:
+            return 1
+        if n % 2:
+            return ((a % MOD) * self.power(a, n -1, MOD)) % MOD
+        pw = self.power(a, n // 2, MOD)
+        return (pw * pw) % MOD
+    
+    def superPow(self, a: int, b: List[int]) -> int:
