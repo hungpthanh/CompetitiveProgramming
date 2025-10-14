@@ -59,12 +59,16 @@ class Solution:
         pw = self.power(a, n // 2, MOD)
         return (pw * pw) % MOD
     
-    def fermat_little(self, a, b, MOD):
-        if a % MOD == 0:
+    def fermat_little(self, a, b, prime):
+        if a % prime == 0:
             return 0
         r = 0
+        MOD = prime - 1
         for c in b:
             r = ((r * 10) % MOD + c % MOD) % MOD
+        return self.power(a, r, prime)
 
     def superPow(self, a: int, b: List[int]) -> int:
-        pass
+        u = self.fermat_little(a, b, 7)
+        v = self.fermat_little(a, b, 191)
+        return (764 * u + 574 * v) % 1337
