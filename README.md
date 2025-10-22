@@ -7,3 +7,5 @@
 2025/10/07: https://leetcode.com/discuss/post/459286/best-posts-of-2019-by-leetcode-46jz/
 
 2025/10/09: Chinese remainder theorem
+
+2025/10/22: https://www.readthistwice.com/person/steven-strogatz
