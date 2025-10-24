@@ -9,3 +9,5 @@
 2025/10/09: Chinese remainder theorem
 
 2025/10/22: https://www.readthistwice.com/person/steven-strogatz
+
+2025/10/24: https://www.youtube.com/watch?v=YKACzIrog24
