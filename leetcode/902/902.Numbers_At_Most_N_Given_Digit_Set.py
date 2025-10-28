@@ -15,10 +15,7 @@ class Solution:
         for i in range(1, sz):
             pw[i + 1] = pw[i] * m
             sum_pw += pw[i]
-            if numbers[i] == 0:
-                dp[i] = dp[i - 1]
-            else:
+            if numbers[i] != 0:
                 cnt = len([item for item in digits if item < numbers[i]])
                 dp[i] = sum_pw + cnt * pw[i] + (0 if (numbers[i] not in digits) else dp[i - 1])
-        print(dp)
         return dp[sz - 1]
