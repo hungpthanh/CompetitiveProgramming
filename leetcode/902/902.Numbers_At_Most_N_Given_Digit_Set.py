@@ -17,5 +17,5 @@ class Solution:
             sum_pw += pw[i]
             if numbers[i] != 0:
                 cnt = len([item for item in digits if item < numbers[i]])
-                dp[i] = sum_pw + cnt * pw[i] + (0 if (numbers[i] not in digits) else dp[i - 1])
+                dp[i] = sum_pw + cnt * pw[i] + (0 if (numbers[i] not in digits) else dp[i - 1])  # <= but cannot start by 0
         return dp[sz - 1]
