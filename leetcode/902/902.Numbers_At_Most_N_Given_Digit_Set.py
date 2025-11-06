@@ -8,14 +8,15 @@ class Solution:
         for item in digits:
             if item <= numbers[0]:
                 dp[0] += 1
-        pw = [0] * (sz + 1)
-        pw[0] = 1
-        pw[1] = m
+        pw = 1
         sum_pw = 0
         for i in range(1, sz):
-            pw[i + 1] = pw[i] * m
-            sum_pw += pw[i]
-            if numbers[i] != 0:
-                cnt = len([item for item in digits if item < numbers[i]])
-                dp[i] = sum_pw + cnt * pw[i] + (0 if (numbers[i] not in digits) else dp[i - 1])  # <= but cannot start by 0
-        return dp[sz - 1]
+            pw = pw * m
+            sum_pw += pw
+            for digit in digits:
+                if digit < numbers[i]:
+                    dp[i] += pw
+            if numbers[i] in digits:
+                dp[i] += dp[i - 1]
+        
+        return dp[sz - 1] + sum_pw
